@@ -9,8 +9,6 @@ document.getElementById('form').addEventListener('submit', async event => {
 
   const user = users.find(user => user.username === username)
 
-  console.log({ username, password })
-
   if (user) {
     if (user.password === password) {
       console.log('OK')

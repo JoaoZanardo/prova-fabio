@@ -1,14 +1,14 @@
-const fullName = document.getElementById('fullName').value
-const name = document.getElementById('name').value
-const password = document.getElementById('password').value
-
 document.getElementById('form').addEventListener('submit', async event => {
   event.preventDefault()
+  
+  const fullName = document.getElementById('fullName').value
+  const name = document.getElementById('name').value
+  const password = document.getElementById('password').value
 
   const data = {
     name: fullName,
-    usuario: name,
-    senha: password
+    username: name,
+    password
   }
 
   const response = await fetch(`https://664e94e9fafad45dfae07b42.mockapi.io/users`, {
@@ -19,10 +19,10 @@ document.getElementById('form').addEventListener('submit', async event => {
     body: JSON.stringify(data)
   })
 
-  console.log(await response.json())
+  console.log({ response })
 
-  document.getElementById('btt').addEventListener('click', function () {
-    window.location.href = '../signin/';
-  })
+  console.log(await response.json())
+  
+  window.location.href = '../signin/signin.html';
 })
 
