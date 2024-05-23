@@ -4,33 +4,23 @@ document.getElementById('form').addEventListener('submit', async event => {
   const username = document.getElementById('name').value
   const password = document.getElementById('password').value
 
-  const response = await fetch(`https://664e7557fafad45dfae01fb8.mockapi.io?usuario=${username}`)
+  const response = await fetch(`https://664e94e9fafad45dfae07b42.mockapi.io/users`)
   const users = await response.json()
 
-  console.log({ users })
+  const user = users.find(user => user.username === username)
 
-  const response2 = await fetch(`https://664e7557fafad45dfae01fb8.mockapi.io`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      username: 'joao',
-      password: '123'
-    })
-  })
+  console.log({ username, password })
 
-  console.log(await response2.json(), 'TOP DMS')
-
-  if (users.length > 0) {
-    const user = users[0]
+  if (user) {
     if (user.password === password) {
+      console.log('OK')
       localStorage.setItem('username', username)
-      window.location.href = 'parabens.html'
+      window.location.href = '../index.html'
     } else {
-      document.getElementById('loginMessage').innerText = 'Usuário ou senha inválidos'
+      console.log('NÃO OK')
+      document.getElementById('error').innerText = '(Usuário ou senha inválidos)'
     }
   } else {
-    document.getElementById('loginMessage').innerText = 'Usuário não encontrado'
+    document.getElementById('error').innerText = '(Usuário não encontrado)'
   }
 })
